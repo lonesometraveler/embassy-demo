@@ -5,13 +5,13 @@ A simple [Embassy](https://github.com/embassy-rs/embassy) demo app for nrf52832/
 
 ## How to Build
 
-###nRF52832dk
+### nRF52832dk
 
 ``` console
 cargo build --features nrf52832dk
 ```
 
-###nRF52840dk
+### nRF52840dk
 
 ``` console
 cargo build --features nrf52840dk
