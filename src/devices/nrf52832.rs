@@ -1,9 +1,12 @@
 use super::Peripherals;
-use crate::aliases::{Button, I2cConcrete, LedPin, UartConcrete};
+use crate::aliases::{Button, I2cConcrete, LedPin, SpiConcrete, SpiCs, UartConcrete};
 use embassy_nrf::gpio::{Input, Level, Output, OutputDrive, Pull};
-use embassy_nrf::{interrupt, twim, uarte};
+use embassy_nrf::{interrupt, spim, twim, uarte};
 
-pub fn peripherals() -> Peripherals<LedPin, Button, I2cConcrete, UartConcrete> {
+pub use embassy_nrf::peripherals::UARTE0 as UART;
+pub use embassy_nrf::uarte::{UarteRx as UartRx, UarteTx as UartTx};
+
+pub fn peripherals() -> Peripherals<LedPin, Button, I2cConcrete, UartConcrete, SpiConcrete, SpiCs> {
     let p = embassy_nrf::init(Default::default());
     let led = Output::new(p.P0_17, Level::Low, OutputDrive::Standard);
     let button = Input::new(p.P0_13, Pull::Up);
@@ -18,10 +21,17 @@ pub fn peripherals() -> Peripherals<LedPin, Button, I2cConcrete, UartConcrete> {
     let irq = interrupt::take!(UARTE0_UART0);
     let uart = uarte::Uarte::new(p.UARTE0, irq, p.P0_08, p.P0_06, config);
 
+    let config = spim::Config::default();
+    let irq = interrupt::take!(SPIM2_SPIS2_SPI2);
+    let spim = spim::Spim::new(p.SPI2, irq, p.P0_25, p.P0_24, p.P0_23, config);
+    let ncs = Output::new(p.P0_20, Level::High, OutputDrive::Standard);
+
     Peripherals {
-        led,
-        button,
-        i2c,
-        uart,
+        led: Some(led),
+        button: Some(button),
+        i2c: Some(i2c),
+        uart: Some(uart),
+        spim: Some(spim),
+        ncs: Some(ncs),
     }
 }

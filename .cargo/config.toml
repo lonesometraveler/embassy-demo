@@ -2,6 +2,7 @@
 # replace nRF52840_xxAA with your chip as listed in `probe-run --list-chips`
 runner = "probe-run --chip nRF52840_xxAA"
 # runner = "probe-run --chip nRF52832_xxAA"
+# runner = "probe-run --chip STM32F429ZITx"
 
 [build]
 target = "thumbv7em-none-eabi"
