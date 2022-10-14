@@ -17,3 +17,8 @@ cargo build --features nrf52832dk
 cargo build --features nrf52840dk
 ```
 
+### Nucleo-F429ZI
+
+``` console
+cargo build --features nucleo429
+```
