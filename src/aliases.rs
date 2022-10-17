@@ -1,5 +1,5 @@
 #[cfg(feature = "nrf52832dk")]
-mod aliase {
+mod alias {
     use embassy_nrf::gpio::{Input, Output};
     use embassy_nrf::peripherals::{P0_13, P0_17, P0_20, SPI2, TWISPI0, UARTE0};
     pub type LedPin = Output<'static, P0_17>;
@@ -11,7 +11,7 @@ mod aliase {
 }
 
 #[cfg(feature = "nrf52840dk")]
-mod aliase {
+mod alias {
     use embassy_nrf::gpio::{Input, Output};
     use embassy_nrf::peripherals::{P0_11, P0_13, P0_31, SPI3, TWISPI0, UARTE0};
     pub type LedPin = Output<'static, P0_13>;
@@ -23,7 +23,7 @@ mod aliase {
 }
 
 #[cfg(feature = "nucleo429")]
-mod aliase {
+mod alias {
     use embassy_stm32::dma::NoDma;
     use embassy_stm32::exti::ExtiInput;
     use embassy_stm32::gpio::Output;
@@ -36,7 +36,7 @@ mod aliase {
     pub type SpiCs = Output<'static, PE0>;
 }
 
-pub use aliase::{Button, I2cConcrete, LedPin, SpiConcrete, SpiCs, UartConcrete};
+pub use alias::{Button, I2cConcrete, LedPin, SpiConcrete, SpiCs, UartConcrete};
 
 pub trait I2c: embedded_hal::i2c::I2c {
     type Error: core::fmt::Debug;
