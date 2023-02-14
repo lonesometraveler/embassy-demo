@@ -14,7 +14,7 @@ nucleo429 = ["embassy-stm32/nightly", "embassy-stm32/unstable-traits", "embassy-
 
 [dependencies]
 cortex-m = { version = "0.7.6", features = ["critical-section-single-core"] }
-cortex-m-rt = "0.7.0"
+cortex-m-rt = "0.7"
 panic-probe = { version = "0.3", features = ["print-defmt"] }
 
 embassy-futures = { version = "0.1.0", git = "https://github.com/embassy-rs/embassy" }
